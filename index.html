@@ -131,10 +131,19 @@ let mode='all'; let hideDone=false; let dense=false;
 
 const events=new Map();
 const add=(iso, meds, notes='')=>{if(!events.has(iso))events.set(iso,{meds:[],notes:[]});events.get(iso).meds.push(...meds); if(notes)events.get(iso).notes.push(notes)};
+const toLocalIso=(d)=>{
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  const hh=String(d.getHours()).padStart(2,'0');
+  const mm=String(d.getMinutes()).padStart(2,'0');
+  const ss=String(d.getSeconds()).padStart(2,'0');
+  return `${y}-${m}-${day}T${hh}:${mm}:${ss}`;
+};
 const addEveryHours=(startIso,hours,meds,endIso,notes='')=>{
   const end=new Date(endIso).getTime();
   for(let t=new Date(startIso).getTime(); t<end; t+=hours*60*60*1000){
-    add(new Date(t).toISOString().slice(0,19),meds,notes);
+    add(toLocalIso(new Date(t)),meds,notes);
   }
 };
 
