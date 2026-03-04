@@ -92,7 +92,7 @@
   </div>
 
   <div class="card small" style="margin-top:10px;color:var(--muted)">
-    Regimen: Methocarbamol q8h • Gabapentin q8–12h • Meloxicam q24h w/food • Tylenol ~80mg q12h x3 days (vet-approved)
+    Regimen: Methocarbamol q8h (6a/2p/10p) • Gabapentin q12h (11a/11p) • Tylenol q12h (11a/11p) • Meloxicam q24h (9p, daily liquid)
     <div id="persistInfo" style="margin-top:6px"></div>
   </div>
 </div>
@@ -130,18 +130,23 @@ let mode='all'; let hideDone=false; let dense=false;
 
 const events=new Map();
 const add=(iso, meds, notes='')=>{if(!events.has(iso))events.set(iso,{meds:[],notes:[]});events.get(iso).meds.push(...meds); if(notes)events.get(iso).notes.push(notes)};
-add('2026-03-03T21:00:00',['Methocarbamol','Meloxicam','Tylenol'],'with dinner');
-add('2026-03-03T23:15:00',['Gabapentin'],'earliest safe from prior dose');
-const start=new Date('2026-03-04T00:00:00'); const end=new Date('2026-03-18T00:00:00');
-for(let d=new Date(start); d<end; d.setDate(d.getDate()+1)){
-  const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), day=String(d.getDate()).padStart(2,'0'); const base=`${y}-${m}-${day}`;
-  add(`${base}T06:00:00`,['Methocarbamol']); add(`${base}T07:15:00`,['Gabapentin']);
-  add(`${base}T14:00:00`,['Methocarbamol']); add(`${base}T15:15:00`,['Gabapentin']);
-  add(`${base}T22:00:00`,['Methocarbamol','Meloxicam'],'with dinner'); add(`${base}T23:15:00`,['Gabapentin']);
-}
-['2026-03-04T09:00:00','2026-03-04T21:00:00','2026-03-05T09:00:00','2026-03-05T21:00:00','2026-03-06T09:00:00'].forEach(t=>add(t,['Tylenol'],'3-day bridge'));
+const addEveryHours=(startIso,hours,meds,endIso,notes='')=>{
+  const end=new Date(endIso).getTime();
+  for(let t=new Date(startIso).getTime(); t<end; t+=hours*60*60*1000){
+    add(new Date(t).toISOString().slice(0,19),meds,notes);
+  }
+};
 
-const rows=[...events.entries()].sort((a,b)=>new Date(a[0])-new Date(b[0])).map((e,i)=>({id:`r${i+1}`,iso:e[0],...e[1]}));
+// Updated per Tara (Mar 4):
+// - Gabapentin + Tylenol q12h at 11:00 / 23:00
+// - Methocarbamol q8h anchored from 06:00
+// - Meloxicam q24h anchored from 21:00
+const horizon='2026-03-18T00:00:00';
+addEveryHours('2026-03-03T21:00:00',24,['Meloxicam'],'2026-03-18T00:00:00','q24h (daily liquid)');
+addEveryHours('2026-03-03T23:00:00',12,['Gabapentin','Tylenol'],'2026-03-18T00:00:00','q12h cadence');
+addEveryHours('2026-03-04T06:00:00',8,['Methocarbamol'],'2026-03-18T00:00:00','q8h cadence');
+
+const rows=[...events.entries()].sort((a,b)=>new Date(a[0])-new Date(b[0])).map((e)=>({id:`dose:${e[0]}`,iso:e[0],...e[1]}));
 
 const fmt=iso=>new Date(iso).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
 const medClass=m=>m.startsWith('Meth')?'m-meth':m.startsWith('Gaba')?'m-gaba':m.startsWith('Melo')?'m-melo':'m-tyl';
