@@ -93,12 +93,39 @@
 
   <div class="card small" style="margin-top:10px;color:var(--muted)">
     Regimen: Methocarbamol q8h • Gabapentin q8–12h • Meloxicam q24h w/food • Tylenol ~80mg q12h x3 days (vet-approved)
+    <div id="persistInfo" style="margin-top:6px"></div>
   </div>
 </div>
 
 <script>
-const KEY='coltrane-med-unified-v2';
-const state=JSON.parse(localStorage.getItem(KEY)||'{}');
+const KEY='coltrane-med-unified-v3';
+const COOKIE_KEY='coltrane_med_unified_v3';
+
+function getCookie(name){
+  const parts=document.cookie.split(';').map(v=>v.trim());
+  const hit=parts.find(v=>v.startsWith(name+'='));
+  return hit ? decodeURIComponent(hit.split('=').slice(1).join('=')) : '';
+}
+
+function setCookie(name,value,days=365){
+  const d=new Date(); d.setTime(d.getTime()+days*24*60*60*1000);
+  document.cookie=`${name}=${encodeURIComponent(value)}; expires=${d.toUTCString()}; path=/; SameSite=Lax`;
+}
+
+function loadState(){
+  let ls={}; let ck={};
+  try{ ls=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ ls={}; }
+  try{ ck=JSON.parse(getCookie(COOKIE_KEY)||'{}')||{}; }catch(e){ ck={}; }
+  return Object.keys(ls).length ? ls : ck;
+}
+
+function persistState(state){
+  const payload=JSON.stringify(state);
+  try{ localStorage.setItem(KEY,payload); }catch(e){}
+  try{ setCookie(COOKIE_KEY,payload); }catch(e){}
+}
+
+const state=loadState();
 let mode='all'; let hideDone=false; let dense=false;
 
 const events=new Map();
@@ -171,16 +198,22 @@ function render(){
   const tw=document.getElementById('tableWrap'); tw.classList.toggle('dense',dense);
   document.getElementById('hideDone').textContent=`Hide done: ${hideDone?'On':'Off'}`;
   document.getElementById('dense').textContent=`Dense: ${dense?'On':'Off'}`;
+  const host=location.hostname;
+  document.getElementById('persistInfo').textContent=`Saved locally on this domain (${host}). If you switch domains (e.g., vercel.app vs mybotpetunia.com), checkmarks won't sync.`;
 }
 
-document.addEventListener('change',e=>{ if(e.target.matches('input[type=checkbox][data-id]')){ state[e.target.dataset.id]=e.target.checked; localStorage.setItem(KEY,JSON.stringify(state)); render(); }});
+document.addEventListener('change',e=>{ if(e.target.matches('input[type=checkbox][data-id]')){ state[e.target.dataset.id]=e.target.checked; persistState(state); render(); }});
 
 document.getElementById('showAll').onclick=()=>{mode='all';render()};
 document.getElementById('show24').onclick=()=>{mode='24h';render()};
 document.getElementById('showToday').onclick=()=>{mode='today';render()};
 document.getElementById('hideDone').onclick=()=>{hideDone=!hideDone;render()};
 document.getElementById('dense').onclick=()=>{dense=!dense;render()};
-document.getElementById('reset').onclick=()=>{localStorage.removeItem(KEY);location.reload()};
+document.getElementById('reset').onclick=()=>{
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  setCookie(COOKIE_KEY,'{}',-1);
+  location.reload();
+};
 
 // Alarm feature (best effort; requires page open)
 let alarmFiredFor='';
