@@ -141,9 +141,13 @@ const toLocalIso=(d)=>{
   return `${y}-${m}-${day}T${hh}:${mm}:${ss}`;
 };
 const addEveryHours=(startIso,hours,meds,endIso,notes='')=>{
-  const end=new Date(endIso).getTime();
-  for(let t=new Date(startIso).getTime(); t<end; t+=hours*60*60*1000){
-    add(toLocalIso(new Date(t)),meds,notes);
+  const end=new Date(endIso);
+  let cur=new Date(startIso);
+  while(cur<end){
+    add(toLocalIso(cur),meds,notes);
+    const next=new Date(cur);
+    next.setHours(next.getHours()+hours); // wall-clock cadence (DST-safe)
+    cur=next;
   }
 };
 
