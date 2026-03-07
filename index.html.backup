@@ -112,37 +112,20 @@ function setCookie(name,value,days=365){
   document.cookie=`${name}=${encodeURIComponent(value)}; expires=${d.toUTCString()}; path=/; SameSite=Lax`;
 }
 
-const API_URL = '/api/state';
-
-async function loadState(){
-  // Try API first
-  try {
-    const res = await fetch(API_URL);
-    if (res.ok) {
-      const data = await res.json();
-      return data || {};
-    }
-  } catch(e) {
-    console.warn('API unavailable, using localStorage');
-  }
-  
-  // Fallback to localStorage
-  let ls={};
+function loadState(){
+  let ls={}; let ck={};
   try{ ls=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ ls={}; }
+  try{ ck=JSON.parse(getCookie(COOKIE_KEY)||'{}')||{}; }catch(e){ ck={}; }
+  return Object.keys(ls).length ? ls : ck;
+}
 
+function persistState(state){
+  const payload=JSON.stringify(state);
+  try{ localStorage.setItem(KEY,payload); }catch(e){}
+  try{ setCookie(COOKIE_KEY,payload); }catch(e){}
+}
 
-async function persistState(state){
-  // Save to API
-  try {
-    await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(state)
-    });
-  } catch(e) {
-    console.warn('API save failed, using localStorage');
-
-let state={}; loadState().then(s => { state=s; render(); });
+const state=loadState();
 const SEED_KEY='__seed_mar4_anchors';
 let mode='all'; let hideDone=false; let dense=false;
 
@@ -183,7 +166,7 @@ const rows=[...events.entries()].sort((a,b)=>new Date(a[0])-new Date(b[0])).map(
 if(!state[SEED_KEY]){
   ['2026-03-03T21:00:00','2026-03-03T23:00:00','2026-03-04T06:00:00','2026-03-04T11:00:00'].forEach(iso=>{ state[`dose:${iso}`]=true; });
   state[SEED_KEY]=true;
-  persistState(state).catch(e=>console.error(e));
+  persistState(state);
 }
 
 const fmt=iso=>new Date(iso).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
