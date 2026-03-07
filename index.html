@@ -5,75 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coltrane Med Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,300;1,6..96,400;1,6..96,700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,300;1,6..96,400;1,6..96,700;1,6..96,900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
   <style>
-    /* Holograph Design System v1.8 + Petunia Visual Language */
+    /* Petunia Visual Language v1.0 — Applied to Coltrane Tracker */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
     :root {
       /* Neutrals */
-      --color-neutral-950: #080C10;
-      --color-neutral-900: #0F1419;
-      --color-neutral-850: #161D26;
-      --color-neutral-800: #1E2733;
-      --color-neutral-700: #2E3D4E;
-      --color-neutral-600: #3F5568;
-      --color-neutral-500: #567085;
-      --color-neutral-400: #7A97AE;
-      --color-neutral-300: #A8BDC9;
-      --color-neutral-200: #C8D8E2;
-      --color-neutral-100: #E2EBF0;
+      --bg-base:      #080C10;
+      --bg-raised:    #0D1318;
+      --bg-surface:   #111920;
+      --bg-elevated:  #16212B;
+      --text-primary:    #E2EBF0;
+      --text-secondary:  #B4C8D6;
+      --text-tertiary:   #7A97AE;
       
-      /* Teal / Iridescent cyan */
-      --color-teal-700:  #0D5C64;
-      --color-teal-500:  #1B9AA8;
-      --color-teal-400:  #2DB5C4;
-      --color-teal-300:  #5ECDD8;
-      --color-teal-200:  #96E0E8;
+      /* Brand Colors — Teal/Violet */
+      --teal:         #5ECDD8;
+      --teal-lt:      #B8E8EE;
+      --violet:       #A991E2;
       
-      /* Violet */
-      --color-violet-300: #A991E2;
+      /* Status Colors — Semantic Only */
+      --status-success:  #5DB872;
+      --status-warning:  #F0A040;
+      --status-error:    #E05040;
       
-      /* Amber - caution/handoff ONLY */
-      --color-amber-300: #F0A040;
-      
-      /* Green - success/confirmation ONLY */
-      --color-green-300: #5DB872;
-      
-      /* Red */
-      --color-red-400: #E05040;
-      
-      /* Backgrounds */
-      --bg-base:      var(--color-neutral-950);
-      --bg-surface:   var(--color-neutral-900);
-      --bg-overlay:   var(--color-neutral-850);
-      --bg-raised:    var(--color-neutral-800);
-      
-      /* Text */
-      --text-primary:    var(--color-neutral-100);
-      --text-secondary:  var(--color-neutral-300);
-      --text-tertiary:   var(--color-neutral-400);
-      
-      /* Brand */
-      --brand-teal:      var(--color-teal-300);
-      --brand-violet:    var(--color-violet-300);
-      
-      /* Status */
-      --status-success:  var(--color-green-300);
-      --status-warning:  var(--color-amber-300);
-      --status-error:    var(--color-red-400);
+      /* Iris Gradient */
+      --iris-1: #5ECDD8;
+      --iris-2: #B8E8EE;
+      --iris-3: #A991E2;
       
       /* Borders */
-      --border-subtle:   rgba(162, 189, 201, 0.12);
-      --border-default:  rgba(162, 189, 201, 0.22);
-      --border-strong:   rgba(162, 189, 201, 0.40);
+      --border-subtle:   rgba(162, 189, 201, 0.06);
+      --border-default:  rgba(162, 189, 201, 0.12);
+      --border-strong:   rgba(162, 189, 201, 0.22);
       
-      /* Glass morphism */
-      --glass-bg:        rgba(15, 20, 25, 0.7);
-      --glass-border:    rgba(162, 189, 201, 0.15);
+      /* Glass */
+      --glass-bg:        rgba(17, 25, 32, 0.6);
+      --glass-border:    rgba(94, 205, 216, 0.12);
       
       /* Spacing */
-      --space-1:  0.25rem;
       --space-2:  0.5rem;
       --space-3:  0.75rem;
       --space-4:  1rem;
@@ -83,250 +54,276 @@
       --space-10: 2.5rem;
       --space-12: 3rem;
       
-      /* Fonts */
+      /* Typography */
       --font-display: 'Bodoni Moda', serif;
       --font-body:    'IBM Plex Sans', sans-serif;
       --font-mono:    'IBM Plex Mono', monospace;
-      
-      /* Type scale */
-      --text-xs:   0.75rem;
-      --text-sm:   0.875rem;
-      --text-base: 1rem;
-      --text-lg:   1.125rem;
-      --text-xl:   1.25rem;
-      --text-2xl:  1.563rem;
-      --text-3xl:  1.953rem;
-      --text-4xl:  2.441rem;
-      --text-5xl:  3.052rem;
-      
-      /* Radii */
-      --radius-sm:   3px;
-      --radius-md:   6px;
-      --radius-lg:   10px;
-      --radius-xl:   16px;
-      --radius-2xl:  24px;
-      --radius-full: 9999px;
-      
-      /* Shadows */
-      --shadow-sm:   0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
-      --shadow-md:   0 4px 12px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
-      --shadow-lg:   0 10px 30px rgba(0,0,0,0.6), 0 4px 8px rgba(0,0,0,0.3);
-      --shadow-xl:   0 20px 50px rgba(0,0,0,0.7), 0 8px 16px rgba(0,0,0,0.4);
     }
     
-    /* Background texture */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.03"/></svg>');
-      pointer-events: none;
-      z-index: 1;
-    }
-    
+    /* Background Texture Layers */
     body {
       background: var(--bg-base);
       color: var(--text-secondary);
       font-family: var(--font-body);
-      font-size: var(--text-base);
-      line-height: 1.55;
+      font-size: 15px;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       position: relative;
+      min-height: 100vh;
+    }
+    
+    /* Layer 1: Fine Grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(94,205,216,0.08) 23px, rgba(94,205,216,0.08) 24px),
+        repeating-linear-gradient(90deg, transparent, transparent 23px, rgba(94,205,216,0.08) 23px, rgba(94,205,216,0.08) 24px);
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    /* Layer 2: Film Grain */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.04"/></svg>');
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.8;
     }
     
     .container {
-      max-width: 1160px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: var(--space-8);
+      padding: var(--space-10);
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
     
-    /* Header with Iris gradient */
+    /* Header — Expressive Bodoni Display */
     .header {
       margin-bottom: var(--space-12);
+      padding-bottom: var(--space-8);
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+    }
+    
+    /* Radial Echo Background Behind Header */
+    .header::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-image:
+        radial-gradient(circle, transparent 80px, rgba(94,205,216,0.08) 81px, transparent 82px),
+        radial-gradient(circle, transparent 160px, rgba(169,145,226,0.06) 161px, transparent 162px),
+        radial-gradient(circle, transparent 240px, rgba(94,205,216,0.04) 241px, transparent 242px);
+      pointer-events: none;
+      z-index: -1;
     }
     
     h1 {
       font-family: var(--font-display);
-      font-size: var(--text-5xl);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: var(--space-3);
-      background: linear-gradient(135deg, 
-        #5ECDD8 0%,
-        #A991E2 25%,
-        #F0A040 50%,
-        #5DB872 75%,
-        #5ECDD8 100%);
-      background-size: 200% auto;
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-4);
+      background: linear-gradient(110deg, 
+        var(--iris-1) 0%,
+        var(--iris-2) 30%,
+        var(--iris-3) 60%,
+        var(--iris-1) 100%);
+      background-size: 300% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: iris-shift 8s ease-in-out infinite;
+      animation: iris-flow 8s ease-in-out infinite;
     }
     
-    @keyframes iris-shift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+    @keyframes iris-flow {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
     }
     
     .subtitle {
       font-family: var(--font-body);
-      font-size: var(--text-lg);
-      color: var(--text-secondary);
+      font-size: 16px;
+      color: var(--text-tertiary);
+      max-width: 560px;
     }
     
-    /* Glass morphism cards */
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: var(--space-3);
+    }
+    
+    /* Glass Morphism Stats Cards */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: var(--space-6);
-      margin-bottom: var(--space-8);
+      margin-bottom: var(--space-10);
     }
     
     .stat-card {
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(24px) saturate(140%);
+      -webkit-backdrop-filter: blur(24px) saturate(140%);
       border: 1px solid var(--glass-border);
-      border-radius: var(--radius-2xl);
+      border-radius: 12px;
       padding: var(--space-8);
-      box-shadow: var(--shadow-xl);
       position: relative;
       overflow: hidden;
     }
     
+    /* Shimmer effect on top edge */
     .stat-card::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 0;
-      right: 0;
+      left: -50%;
+      width: 200%;
       height: 1px;
       background: linear-gradient(90deg, 
         transparent,
-        rgba(94, 205, 216, 0.3),
+        rgba(94,205,216,0.4) 40%,
+        rgba(169,145,226,0.3) 60%,
         transparent
       );
+      animation: shimmer 6s ease-in-out infinite;
+    }
+    
+    @keyframes shimmer {
+      0%, 100% { transform: translateX(0%); }
+      50% { transform: translateX(25%); }
     }
     
     .stat-label {
       font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      letter-spacing: 0.1em;
+      font-size: 10px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-tertiary);
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-5);
     }
     
     .stat-value {
-      font-family: var(--font-mono);
-      font-size: 3rem;
+      font-family: var(--font-display);
+      font-size: 3.5rem;
       font-weight: 300;
-      color: var(--brand-teal);
-      line-height: 1;
-      margin-bottom: var(--space-4);
+      color: var(--text-primary);
+      line-height: 0.95;
+      margin-bottom: var(--space-5);
+      font-variant-numeric: lining-nums;
     }
     
     .stat-detail {
       font-family: var(--font-body);
-      font-size: var(--text-sm);
-      color: var(--text-secondary);
+      font-size: 14px;
+      color: var(--text-tertiary);
+      line-height: 1.5;
     }
     
-    /* Medication badges - Teal/Violet for categories */
+    /* Medication Badges — Brand Colors for Categories */
     .badge {
       display: inline-block;
-      padding: var(--space-1) var(--space-3);
-      border-radius: var(--radius-full);
+      padding: 4px 12px;
+      border-radius: 4px;
       font-family: var(--font-mono);
-      font-size: var(--text-xs);
+      font-size: 11px;
       font-weight: 500;
+      letter-spacing: 0.04em;
       margin-right: var(--space-2);
       margin-bottom: var(--space-2);
       border: 1px solid transparent;
     }
     
-    /* Use brand colors for medication categories */
     .badge-meth { 
-      background: rgba(94, 205, 216, 0.15); 
-      color: var(--brand-teal);
-      border-color: rgba(94, 205, 216, 0.3);
+      background: rgba(94,205,216,0.12); 
+      color: var(--teal);
+      border-color: rgba(94,205,216,0.25);
     }
     
     .badge-gaba { 
-      background: rgba(169, 145, 226, 0.15); 
-      color: var(--brand-violet);
-      border-color: rgba(169, 145, 226, 0.3);
+      background: rgba(169,145,226,0.12); 
+      color: var(--violet);
+      border-color: rgba(169,145,226,0.25);
     }
     
     .badge-melo { 
-      background: rgba(94, 205, 216, 0.1); 
-      color: var(--brand-teal);
-      border-color: rgba(94, 205, 216, 0.2);
+      background: rgba(94,205,216,0.08); 
+      color: var(--teal);
+      border-color: rgba(94,205,216,0.18);
     }
     
     .badge-tyl { 
-      background: rgba(169, 145, 226, 0.1); 
-      color: var(--brand-violet);
-      border-color: rgba(169, 145, 226, 0.2);
+      background: rgba(169,145,226,0.08); 
+      color: var(--violet);
+      border-color: rgba(169,145,226,0.18);
     }
     
     /* Buttons */
     .controls {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-2);
-      margin-bottom: var(--space-8);
+      gap: var(--space-3);
+      margin-bottom: var(--space-10);
     }
     
     .btn {
       font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      padding: var(--space-3) var(--space-5);
-      border-radius: var(--radius-lg);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      padding: 12px 20px;
+      border-radius: 6px;
       border: 1px solid var(--border-default);
-      background: var(--bg-raised);
-      color: var(--text-secondary);
+      background: var(--bg-surface);
+      color: var(--text-tertiary);
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .btn:hover {
-      border-color: var(--brand-teal);
-      color: var(--brand-teal);
-      background: rgba(94, 205, 216, 0.08);
+      border-color: var(--teal);
+      color: var(--teal);
+      background: rgba(94,205,216,0.06);
       transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
     }
     
     .btn-primary {
-      background: var(--brand-teal);
-      border-color: var(--brand-teal);
+      background: var(--teal);
+      border-color: var(--teal);
       color: var(--bg-base);
-      box-shadow: 0 4px 12px rgba(94, 205, 216, 0.3);
+      font-weight: 500;
     }
     
     .btn-primary:hover {
-      background: var(--color-teal-400);
-      border-color: var(--color-teal-400);
-      box-shadow: 0 6px 20px rgba(94, 205, 216, 0.4);
+      background: var(--teal-lt);
+      border-color: var(--teal-lt);
+      box-shadow: 0 4px 16px rgba(94,205,216,0.3);
     }
     
-    /* Table */
+    /* Table — Technical Data Display */
     .table-wrapper {
       background: var(--glass-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border);
-      border-radius: var(--radius-2xl);
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: var(--shadow-xl);
-      margin-bottom: var(--space-8);
+      margin-bottom: var(--space-10);
     }
     
     table {
@@ -336,14 +333,14 @@
     
     th {
       font-family: var(--font-mono);
-      font-size: var(--text-xs);
+      font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-tertiary);
-      background: rgba(8, 12, 16, 0.6);
-      backdrop-filter: blur(10px);
-      padding: var(--space-4);
+      background: rgba(8,12,16,0.7);
+      backdrop-filter: blur(8px);
+      padding: 14px 16px;
       text-align: left;
       border-bottom: 1px solid var(--border-subtle);
       position: sticky;
@@ -353,9 +350,9 @@
     
     td {
       font-family: var(--font-body);
-      font-size: var(--text-sm);
+      font-size: 14px;
       color: var(--text-primary);
-      padding: var(--space-4);
+      padding: 14px 16px;
       border-bottom: 1px solid var(--border-subtle);
     }
     
@@ -364,7 +361,7 @@
     }
     
     tr.done {
-      opacity: 0.4;
+      opacity: 0.35;
     }
     
     tr.done td:nth-child(n+3) {
@@ -372,55 +369,62 @@
     }
     
     tr.next {
-      border-left: 3px solid var(--brand-teal);
-      background: rgba(94, 205, 216, 0.05);
+      border-left: 3px solid var(--teal);
+      background: rgba(94,205,216,0.04);
     }
     
     /* Checkbox */
     input[type="checkbox"] {
       width: 20px;
       height: 20px;
-      border-radius: var(--radius-sm);
+      border-radius: 3px;
       cursor: pointer;
-      accent-color: var(--brand-teal);
+      accent-color: var(--teal);
     }
     
-    /* Status - Green for success, Amber for warning */
+    /* Status — Semantic Color Usage Only */
     .status-ok {
       color: var(--status-success);
       font-family: var(--font-mono);
-      font-size: var(--text-xs);
+      font-size: 11px;
       font-weight: 500;
+      letter-spacing: 0.04em;
     }
     
-    .status-bad {
+    .status-warning {
       color: var(--status-warning);
       font-family: var(--font-mono);
-      font-size: var(--text-xs);
+      font-size: 11px;
       font-weight: 500;
+      letter-spacing: 0.04em;
     }
     
-    /* Footer */
+    /* Footer — Monospace Data */
     .footer {
       font-family: var(--font-body);
-      font-size: var(--text-sm);
+      font-size: 14px;
       color: var(--text-tertiary);
-      padding-top: var(--space-6);
+      padding-top: var(--space-8);
       border-top: 1px solid var(--border-subtle);
       line-height: 1.7;
     }
     
     .footer-data {
       font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      margin-top: var(--space-2);
+      font-size: 11px;
+      margin-top: var(--space-3);
       color: var(--text-tertiary);
+      letter-spacing: 0.04em;
     }
     
     /* Responsive */
     @media (max-width: 767px) {
+      .container {
+        padding: var(--space-6);
+      }
+      
       h1 {
-        font-size: var(--text-4xl);
+        font-size: 2.5rem;
       }
       
       .stats-grid {
@@ -428,11 +432,16 @@
       }
       
       .stat-value {
-        font-size: 2.5rem;
+        font-size: 3rem;
       }
       
       th:nth-child(5), td:nth-child(5) {
         display: none;
+      }
+      
+      .header::before {
+        width: 400px;
+        height: 400px;
       }
     }
   </style>
@@ -441,8 +450,9 @@
   <script src="/auth-check.js"></script>
   <div class="container">
     <div class="header">
-      <h1>Coltrane Med Tracker</h1>
-      <div class="subtitle">Medication schedule and progress tracking</div>
+      <div class="eyebrow">Petunia / Coltrane Med Tracker</div>
+      <h1>Medicine<br>Schedule</h1>
+      <div class="subtitle">Automated medication tracking for Coltrane — q8h, q12h, q24h cadences with intelligent next-dose calculation</div>
     </div>
 
     <!-- Stats -->
@@ -451,7 +461,7 @@
         <div class="stat-label">Next Dose</div>
         <div class="stat-value" id="nextWhen">—</div>
         <div class="stat-detail" id="nextMeds">—</div>
-        <div class="stat-detail" id="countdown" style="margin-top: var(--space-2); color: var(--text-tertiary);">—</div>
+        <div class="stat-detail" id="countdown" style="margin-top: var(--space-3); font-family: var(--font-mono); font-size: 12px;">—</div>
       </div>
       
       <div class="stat-card">
@@ -462,7 +472,7 @@
       
       <div class="stat-card">
         <div class="stat-label">Alarm Status</div>
-        <div style="margin: var(--space-4) 0;">
+        <div style="margin: var(--space-4) 0; display: flex; flex-wrap: wrap; gap: var(--space-2);">
           <button id="enableNotif" class="btn btn-primary">Enable Notifications</button>
           <button id="testAlarm" class="btn">Test Alarm</button>
         </div>
@@ -596,11 +606,11 @@ function render(){
   list.forEach(r=>{
     const tr=document.createElement('tr'); if(state[r.id]) tr.classList.add('done');
     const meds=[...new Set(r.meds)];
-    const status=new Date(r.iso)<new Date()?(state[r.id]?'<span class="status-ok">✓ done</span>':'<span class="status-bad">⚠ overdue</span>'):'upcoming';
+    const status=new Date(r.iso)<new Date()?(state[r.id]?'<span class="status-ok">✓ done</span>':'<span class="status-warning">⚠ overdue</span>'):'upcoming';
     tr.innerHTML=`<td><input type="checkbox" ${state[r.id]?'checked':''} data-id="${r.id}"></td>
       <td style="font-family: var(--font-body);">${fmt(r.iso)}</td>
       <td><div>${meds.map(m=>`<span class="badge ${medClass(m)}">${m}</span>`).join('')}</div></td>
-      <td style="color: var(--text-tertiary); font-family: var(--font-body);">${[...new Set(r.notes)].join('; ')||'-'}</td>
+      <td style="color: var(--text-tertiary); font-family: var(--font-body); font-size: 13px;">${[...new Set(r.notes)].join('; ')||'—'}</td>
       <td>${status}</td>`;
     if(nd && nd.id===r.id) tr.classList.add('next');
     body.appendChild(tr);
@@ -612,7 +622,8 @@ function render(){
   const n=nextDue();
   if(!n){document.getElementById('nextWhen').textContent='All done'; document.getElementById('nextMeds').textContent='—'; document.getElementById('countdown').textContent='';}
   else {
-    document.getElementById('nextWhen').textContent=fmt(n.iso).split(',')[1].trim();
+    const timeStr=fmt(n.iso).split(',')[1].trim();
+    document.getElementById('nextWhen').textContent=timeStr;
     document.getElementById('nextMeds').innerHTML=[...new Set(n.meds)].map(m=>`<span class="badge ${medClass(m)}">${m}</span>`).join('');
     const ms=new Date(n.iso)-new Date();
     const abs=Math.abs(ms); const h=Math.floor(abs/3600000), m=Math.floor((abs%3600000)/60000);
@@ -621,7 +632,7 @@ function render(){
 
   document.getElementById('hideDone').textContent=`Hide Done: ${hideDone?'On':'Off'}`;
   document.getElementById('dense').textContent=`Compact: ${dense?'On':'Off'}`;
-  document.getElementById('persistInfo').textContent=`✓ Data saved locally on ${location.hostname}`;
+  document.getElementById('persistInfo').textContent=`✓ Data persisted · ${location.hostname}`;
 }
 
 document.addEventListener('change',e=>{ if(e.target.matches('input[type=checkbox][data-id]')){ state[e.target.dataset.id]=e.target.checked; persistState(state); render(); }});
