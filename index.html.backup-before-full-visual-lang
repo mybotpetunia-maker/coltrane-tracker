@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,300;1,6..96,400;1,6..96,700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
   <style>
-    /* Holograph Design System v1.8 + Petunia Visual Language */
+    /* Holograph Design System v1.8 - Exact implementation */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
     :root {
@@ -34,10 +34,10 @@
       /* Violet */
       --color-violet-300: #A991E2;
       
-      /* Amber - caution/handoff ONLY */
+      /* Amber */
       --color-amber-300: #F0A040;
       
-      /* Green - success/confirmation ONLY */
+      /* Green */
       --color-green-300: #5DB872;
       
       /* Red */
@@ -48,6 +48,7 @@
       --bg-surface:   var(--color-neutral-900);
       --bg-overlay:   var(--color-neutral-850);
       --bg-raised:    var(--color-neutral-800);
+      --bg-subtle:    var(--color-neutral-700);
       
       /* Text */
       --text-primary:    var(--color-neutral-100);
@@ -57,6 +58,8 @@
       /* Brand */
       --brand-teal:      var(--color-teal-300);
       --brand-violet:    var(--color-violet-300);
+      --brand-amber:     var(--color-amber-300);
+      --brand-green:     var(--color-green-300);
       
       /* Status */
       --status-success:  var(--color-green-300);
@@ -68,10 +71,6 @@
       --border-default:  rgba(162, 189, 201, 0.22);
       --border-strong:   rgba(162, 189, 201, 0.40);
       
-      /* Glass morphism */
-      --glass-bg:        rgba(15, 20, 25, 0.7);
-      --glass-border:    rgba(162, 189, 201, 0.15);
-      
       /* Spacing */
       --space-1:  0.25rem;
       --space-2:  0.5rem;
@@ -81,7 +80,6 @@
       --space-6:  1.5rem;
       --space-8:  2rem;
       --space-10: 2.5rem;
-      --space-12: 3rem;
       
       /* Fonts */
       --font-display: 'Bodoni Moda', serif;
@@ -97,34 +95,18 @@
       --text-2xl:  1.563rem;
       --text-3xl:  1.953rem;
       --text-4xl:  2.441rem;
-      --text-5xl:  3.052rem;
       
       /* Radii */
       --radius-sm:   3px;
       --radius-md:   6px;
       --radius-lg:   10px;
       --radius-xl:   16px;
-      --radius-2xl:  24px;
       --radius-full: 9999px;
       
       /* Shadows */
       --shadow-sm:   0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
       --shadow-md:   0 4px 12px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
       --shadow-lg:   0 10px 30px rgba(0,0,0,0.6), 0 4px 8px rgba(0,0,0,0.3);
-      --shadow-xl:   0 20px 50px rgba(0,0,0,0.7), 0 8px 16px rgba(0,0,0,0.4);
-    }
-    
-    /* Background texture */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.03"/></svg>');
-      pointer-events: none;
-      z-index: 1;
     }
     
     body {
@@ -134,53 +116,31 @@
       font-size: var(--text-base);
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
-      position: relative;
     }
     
     .container {
       max-width: 1160px;
       margin: 0 auto;
-      padding: var(--space-8);
-      position: relative;
-      z-index: 2;
+      padding: var(--space-6);
     }
     
-    /* Header with Iris gradient */
-    .header {
-      margin-bottom: var(--space-12);
-    }
-    
+    /* Header */
     h1 {
       font-family: var(--font-display);
-      font-size: var(--text-5xl);
+      font-size: var(--text-4xl);
       font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: var(--space-3);
-      background: linear-gradient(135deg, 
-        #5ECDD8 0%,
-        #A991E2 25%,
-        #F0A040 50%,
-        #5DB872 75%,
-        #5ECDD8 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: iris-shift 8s ease-in-out infinite;
-    }
-    
-    @keyframes iris-shift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
     }
     
     .subtitle {
       font-family: var(--font-body);
-      font-size: var(--text-lg);
+      font-size: var(--text-base);
       color: var(--text-secondary);
+      margin-bottom: var(--space-8);
     }
     
-    /* Glass morphism cards */
+    /* Stats Grid */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -189,47 +149,29 @@
     }
     
     .stat-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-2xl);
-      padding: var(--space-8);
-      box-shadow: var(--shadow-xl);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, 
-        transparent,
-        rgba(94, 205, 216, 0.3),
-        transparent
-      );
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-md);
     }
     
     .stat-label {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
       color: var(--text-tertiary);
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-3);
     }
     
     .stat-value {
       font-family: var(--font-mono);
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 300;
       color: var(--brand-teal);
       line-height: 1;
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-3);
     }
     
     .stat-detail {
@@ -238,7 +180,7 @@
       color: var(--text-secondary);
     }
     
-    /* Medication badges - Teal/Violet for categories */
+    /* Badges */
     .badge {
       display: inline-block;
       padding: var(--space-1) var(--space-3);
@@ -248,33 +190,12 @@
       font-weight: 500;
       margin-right: var(--space-2);
       margin-bottom: var(--space-2);
-      border: 1px solid transparent;
     }
     
-    /* Use brand colors for medication categories */
-    .badge-meth { 
-      background: rgba(94, 205, 216, 0.15); 
-      color: var(--brand-teal);
-      border-color: rgba(94, 205, 216, 0.3);
-    }
-    
-    .badge-gaba { 
-      background: rgba(169, 145, 226, 0.15); 
-      color: var(--brand-violet);
-      border-color: rgba(169, 145, 226, 0.3);
-    }
-    
-    .badge-melo { 
-      background: rgba(94, 205, 216, 0.1); 
-      color: var(--brand-teal);
-      border-color: rgba(94, 205, 216, 0.2);
-    }
-    
-    .badge-tyl { 
-      background: rgba(169, 145, 226, 0.1); 
-      color: var(--brand-violet);
-      border-color: rgba(169, 145, 226, 0.2);
-    }
+    .badge-meth { background: rgba(94, 205, 216, 0.15); color: var(--brand-teal); }
+    .badge-gaba { background: rgba(169, 145, 226, 0.15); color: var(--brand-violet); }
+    .badge-melo { background: rgba(240, 160, 64, 0.15); color: var(--brand-amber); }
+    .badge-tyl { background: rgba(93, 184, 114, 0.15); color: var(--brand-green); }
     
     /* Buttons */
     .controls {
@@ -287,45 +208,39 @@
     .btn {
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      padding: var(--space-3) var(--space-5);
-      border-radius: var(--radius-lg);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-md);
       border: 1px solid var(--border-default);
       background: var(--bg-raised);
       color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .btn:hover {
       border-color: var(--brand-teal);
       color: var(--brand-teal);
       background: rgba(94, 205, 216, 0.08);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
     }
     
     .btn-primary {
       background: var(--brand-teal);
       border-color: var(--brand-teal);
       color: var(--bg-base);
-      box-shadow: 0 4px 12px rgba(94, 205, 216, 0.3);
     }
     
     .btn-primary:hover {
       background: var(--color-teal-400);
       border-color: var(--color-teal-400);
-      box-shadow: 0 6px 20px rgba(94, 205, 216, 0.4);
     }
     
     /* Table */
     .table-wrapper {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-2xl);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
       overflow: hidden;
-      box-shadow: var(--shadow-xl);
+      box-shadow: var(--shadow-md);
       margin-bottom: var(--space-8);
     }
     
@@ -338,17 +253,15 @@
       font-family: var(--font-mono);
       font-size: var(--text-xs);
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
       color: var(--text-tertiary);
-      background: rgba(8, 12, 16, 0.6);
-      backdrop-filter: blur(10px);
+      background: rgba(8, 12, 16, 0.5);
       padding: var(--space-4);
       text-align: left;
       border-bottom: 1px solid var(--border-subtle);
       position: sticky;
       top: 0;
-      z-index: 10;
     }
     
     td {
@@ -364,7 +277,7 @@
     }
     
     tr.done {
-      opacity: 0.4;
+      opacity: 0.5;
     }
     
     tr.done td:nth-child(n+3) {
@@ -378,26 +291,24 @@
     
     /* Checkbox */
     input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       border-radius: var(--radius-sm);
       cursor: pointer;
       accent-color: var(--brand-teal);
     }
     
-    /* Status - Green for success, Amber for warning */
+    /* Status */
     .status-ok {
       color: var(--status-success);
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      font-weight: 500;
     }
     
     .status-bad {
-      color: var(--status-warning);
+      color: var(--status-error);
       font-family: var(--font-mono);
       font-size: var(--text-xs);
-      font-weight: 500;
     }
     
     /* Footer */
@@ -419,16 +330,8 @@
     
     /* Responsive */
     @media (max-width: 767px) {
-      h1 {
-        font-size: var(--text-4xl);
-      }
-      
       .stats-grid {
         grid-template-columns: 1fr;
-      }
-      
-      .stat-value {
-        font-size: 2.5rem;
       }
       
       th:nth-child(5), td:nth-child(5) {
@@ -440,10 +343,8 @@
 <body>
   <script src="/auth-check.js"></script>
   <div class="container">
-    <div class="header">
-      <h1>Coltrane Med Tracker</h1>
-      <div class="subtitle">Medication schedule and progress tracking</div>
-    </div>
+    <h1>Coltrane Med Tracker</h1>
+    <div class="subtitle">Medication schedule and progress tracking</div>
 
     <!-- Stats -->
     <div class="stats-grid">
@@ -460,7 +361,7 @@
         <div class="stat-detail">completed doses</div>
       </div>
       
-      <div class="stat-card">
+      <div class="stat-card" style="background: rgba(94, 205, 216, 0.05); border-color: rgba(94, 205, 216, 0.3);">
         <div class="stat-label">Alarm Status</div>
         <div style="margin: var(--space-4) 0;">
           <button id="enableNotif" class="btn btn-primary">Enable Notifications</button>
