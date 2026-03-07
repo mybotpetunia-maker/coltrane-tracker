@@ -183,7 +183,7 @@
       -webkit-backdrop-filter: blur(24px) saturate(140%);
       border: 1px solid var(--glass-border);
       border-radius: 12px;
-      padding: var(--space-8);
+      padding: var(--space-6);
       position: relative;
       overflow: hidden;
     }
@@ -221,7 +221,7 @@
     
     .stat-value {
       font-family: var(--font-mono);
-      font-size: 3.5rem;
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
       font-weight: 300;
       color: var(--text-primary);
       line-height: 0.95;
@@ -420,7 +420,7 @@
     /* Responsive */
     @media (max-width: 767px) {
       .container {
-        padding: var(--space-6);
+        padding: var(--space-4);
       }
       
       h1 {
@@ -429,12 +429,32 @@
       
       .stats-grid {
         grid-template-columns: 1fr;
+        gap: var(--space-4);
       }
       
-      .stat-value {
-        font-size: 3rem;
+      .stat-card {
+        padding: var(--space-5);
       }
       
+      .stat-label {
+        margin-bottom: var(--space-3);
+      }
+      
+      .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      table {
+        min-width: 600px;
+      }
+      
+      th, td {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+      
+      th:nth-child(4), td:nth-child(4),
       th:nth-child(5), td:nth-child(5) {
         display: none;
       }
@@ -442,6 +462,15 @@
       .header::before {
         width: 400px;
         height: 400px;
+      }
+      
+      .controls {
+        gap: var(--space-2);
+      }
+      
+      .btn {
+        padding: 10px 14px;
+        font-size: 10px;
       }
     }
   </style>
