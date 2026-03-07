@@ -159,7 +159,7 @@ const addEveryHours=(startIso,hours,meds,endIso,notes='')=>{
 const horizon='2026-03-18T00:00:00';
 addEveryHours('2026-03-03T21:00:00',24,['Meloxicam'],'2026-03-18T00:00:00','q24h (daily liquid)');
 addEveryHours('2026-03-03T23:00:00',12,['Gabapentin','Tylenol'],'2026-03-18T00:00:00','q12h cadence');
-addEveryHours('2026-03-04T06:00:00',8,['Methocarbamol'],'2026-03-18T00:00:00','q8h cadence');
+addEveryHours('2026-03-04T07:00:00',8,['Methocarbamol'],'2026-03-18T00:00:00','q8h cadence');
 
 const rows=[...events.entries()].sort((a,b)=>new Date(a[0])-new Date(b[0])).map((e)=>({id:`dose:${e[0]}`,iso:e[0],...e[1]}));
 
