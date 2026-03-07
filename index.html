@@ -544,33 +544,84 @@
 
 <script>
 const KEY='coltrane-med-unified-v3';
-const COOKIE_KEY='coltrane_med_unified_v3';
+let state = {};
+let saveTimeout = null;
 
-function getCookie(name){
-  const parts=document.cookie.split(';').map(v=>v.trim());
-  const hit=parts.find(v=>v.startsWith(name+'='));
-  return hit ? decodeURIComponent(hit.split('=').slice(1).join('=')) : '';
+// Load from localStorage immediately (cache), then sync with API
+function loadStateSync(){
+  try {
+    return JSON.parse(localStorage.getItem(KEY)||'{}') || {};
+  } catch(e) {
+    return {};
+  }
 }
 
-function setCookie(name,value,days=365){
-  const d=new Date(); d.setTime(d.getTime()+days*24*60*60*1000);
-  document.cookie=`${name}=${encodeURIComponent(value)}; expires=${d.toUTCString()}; path=/; SameSite=Lax`;
+// Load from API (async)
+async function loadStateFromAPI(){
+  try {
+    const response = await fetch('/api/state', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    
+    if (!response.ok) {
+      console.warn('Failed to load from API, using local cache');
+      return null;
+    }
+    
+    const data = await response.json();
+    return data.state || {};
+  } catch (error) {
+    console.warn('Error loading from API:', error);
+    return null;
+  }
 }
 
-function loadState(){
-  let ls={}; let ck={};
-  try{ ls=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ ls={}; }
-  try{ ck=JSON.parse(getCookie(COOKIE_KEY)||'{}')||{}; }catch(e){ ck={}; }
-  return Object.keys(ls).length ? ls : ck;
+// Save to API (debounced)
+async function persistToAPI(state){
+  try {
+    const response = await fetch('/api/state', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ state })
+    });
+    
+    if (!response.ok) {
+      console.error('Failed to save to API');
+    }
+  } catch (error) {
+    console.error('Error saving to API:', error);
+  }
 }
 
+// Persist state (localStorage immediately, API debounced)
 function persistState(state){
-  const payload=JSON.stringify(state);
-  try{ localStorage.setItem(KEY,payload); }catch(e){}
-  try{ setCookie(COOKIE_KEY,payload); }catch(e){}
+  // Save to localStorage immediately for instant feedback
+  try { 
+    localStorage.setItem(KEY, JSON.stringify(state)); 
+  } catch(e) {
+    console.error('localStorage save failed:', e);
+  }
+  
+  // Debounce API save to avoid too many requests
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(() => {
+    persistToAPI(state);
+  }, 1000); // 1 second debounce
 }
 
-const state=loadState();
+// Initialize state from localStorage cache
+state = loadStateSync();
+
+// Then sync with API in the background
+loadStateFromAPI().then(apiState => {
+  if (apiState && Object.keys(apiState).length > 0) {
+    // Merge API state with local state (API is source of truth)
+    state = { ...state, ...apiState };
+    localStorage.setItem(KEY, JSON.stringify(state));
+    render(); // Re-render with synced state
+  }
+});
 const SEED_KEY='__seed_mar4_anchors';
 let mode='all'; let hideDone=false; let dense=false;
 
@@ -661,7 +712,7 @@ function render(){
 
   document.getElementById('hideDone').textContent=`Hide Done: ${hideDone?'On':'Off'}`;
   document.getElementById('dense').textContent=`Compact: ${dense?'On':'Off'}`;
-  document.getElementById('persistInfo').textContent=`✓ Data persisted · ${location.hostname}`;
+  document.getElementById('persistInfo').textContent=`✓ Data synced across devices · ${location.hostname}`;
 }
 
 document.addEventListener('change',e=>{ if(e.target.matches('input[type=checkbox][data-id]')){ state[e.target.dataset.id]=e.target.checked; persistState(state); render(); }});
