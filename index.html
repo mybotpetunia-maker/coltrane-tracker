@@ -1,102 +1,354 @@
-!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coltrane Med Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b1020; --panel:#121a2b; --muted:#9fb0d0; --text:#eef3ff; --line:#22304d;
-      --ok:#22c55e; --warn:#f59e0b; --danger:#ef4444; --accent:#60a5fa;
+    /* Holograph Design System v1.8 - Applied to Coltrane Tracker */
+    :root {
+      /* Colors */
+      --primary: #0052FF;
+      --secondary: #1E293B;
+      --background: #0F172A;
+      --surface: #1E293B;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --accent: #3B82F6;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --error: #EF4444;
+      --border: #334155;
+      
+      /* Spacing */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font:14px/1.35 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-    .wrap{max-width:1100px;margin:0 auto;padding:12px}
-    .top{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,rgba(11,16,32,.98),rgba(11,16,32,.92));backdrop-filter: blur(6px);border-bottom:1px solid var(--line);padding:10px 0 12px}
-    h1{margin:0 0 6px;font-size:20px}
-    .muted{color:var(--muted)}
-    .grid{display:grid;gap:10px}
-    .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px}
-    .kpi{font-size:22px;font-weight:700}
-    .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-    .chip{padding:4px 8px;border-radius:999px;border:1px solid var(--line);background:#0f1626;color:#d9e6ff;font-size:12px}
-    .btn,select{background:#0f1626;color:#d9e6ff;border:1px solid #2b3a5c;border-radius:10px;padding:8px 10px}
-    .btn{cursor:pointer}
-    .btn.primary{background:#1a4b8d;border-color:#2f67b3}
-    .tableWrap{border:1px solid var(--line);border-radius:12px;overflow:hidden}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-    th{font-size:12px;color:#b7c6e8;background:#0f1626;position:sticky;top:0;z-index:2}
-    tr.done{opacity:.45}
-    tr.done td:nth-child(n+3){text-decoration:line-through}
-    .meds{display:flex;gap:6px;flex-wrap:wrap}
-    .m-meth{background:#1f2937}.m-gaba{background:#0f3d2e}.m-melo{background:#3a2c0f}.m-tyl{background:#3a1b2e}
-    .next{border-left:3px solid var(--accent)}
-    .dense th,.dense td{padding:6px 8px;font-size:12px}
-    .warn{border-color:#5b3b0f;background:#1b1408}
-    .ok{color:var(--ok)}
-    .bad{color:var(--danger)}
-    .small{font-size:12px}
-    @media (max-width:760px){
-      .g3{grid-template-columns:1fr}
-      th:nth-child(5),td:nth-child(5){display:none}
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background: var(--background);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-6);
+    }
+    
+    /* Header */
+    .header {
+      margin-bottom: var(--space-8);
+    }
+    
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+    
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+    
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: var(--space-4);
+      color: var(--text-primary);
+    }
+    
+    /* Grid */
+    .grid {
+      display: grid;
+      gap: var(--space-6);
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    /* Stats */
+    .stat-value {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+      margin: var(--space-3) 0;
+    }
+    
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+    
+    .countdown {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-top: var(--space-2);
+    }
+    
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-1) var(--space-3);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-right: var(--space-2);
+      margin-bottom: var(--space-2);
+    }
+    
+    .badge-meth { background: rgba(239, 68, 68, 0.1); color: #EF4444; }
+    .badge-gaba { background: rgba(16, 185, 129, 0.1); color: #10B981; }
+    .badge-melo { background: rgba(245, 158, 11, 0.1); color: #F59E0B; }
+    .badge-tyl { background: rgba(139, 92, 246, 0.1); color: #8B5CF6; }
+    
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2) var(--space-4);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-right: var(--space-2);
+    }
+    
+    .btn:hover {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--accent);
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #0041CC;
+      border-color: #0041CC;
+    }
+    
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+    }
+    
+    /* Table */
+    .table-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: var(--space-4);
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    th {
+      background: rgba(15, 23, 42, 0.5);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    td {
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr.done {
+      opacity: 0.5;
+    }
+    
+    tr.done td:nth-child(n+3) {
+      text-decoration: line-through;
+    }
+    
+    tr.next {
+      border-left: 3px solid var(--primary);
+      background: rgba(0, 82, 255, 0.05);
+    }
+    
+    /* Checkbox */
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+    
+    /* Status */
+    .status-ok { color: var(--success); font-weight: 500; }
+    .status-bad { color: var(--error); font-weight: 500; }
+    
+    /* Footer */
+    .footer {
+      margin-top: var(--space-8);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: var(--space-4);
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      th:nth-child(5), td:nth-child(5) {
+        display: none;
+      }
+      
+      .stat-value {
+        font-size: 28px;
+      }
     }
   </style>
-<script src="/auth-check.js"></script>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <h1>Coltrane Med Tracker</h1>
-    <div class="row small muted">One row per time slot. All meds due at that time are grouped together.</div>
-  </div>
+  <script src="/auth-check.js"></script>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>🐕 Coltrane Med Tracker</h1>
+      <div class="subtitle">Medication schedule and progress tracking</div>
+    </div>
 
-  <div class="grid g3" style="margin-top:10px">
-    <div class="card next">
-      <div class="small muted">Next dose</div>
-      <div id="nextWhen" class="kpi">—</div>
-      <div id="nextMeds" class="small">—</div>
-      <div id="countdown" class="small muted">—</div>
-    </div>
-    <div class="card">
-      <div class="small muted">Today progress</div>
-      <div id="todayProg" class="kpi">0 / 0</div>
-      <div class="small muted">completed slots</div>
-    </div>
-    <div class="card warn">
-      <div class="small muted">Alarm</div>
-      <div class="row" style="margin-top:6px">
-        <button id="enableNotif" class="btn">Enable notifications</button>
-        <button id="testAlarm" class="btn">Test alarm</button>
+    <!-- Stats Grid -->
+    <div class="grid">
+      <div class="card">
+        <div class="stat-label">Next Dose</div>
+        <div class="stat-value" id="nextWhen">—</div>
+        <div id="nextMeds" style="margin-bottom: var(--space-2);">—</div>
+        <div class="countdown" id="countdown">—</div>
       </div>
-      <div id="alarmState" class="small muted" style="margin-top:6px">Off</div>
+      
+      <div class="card">
+        <div class="stat-label">Today's Progress</div>
+        <div class="stat-value" id="todayProg">0 / 0</div>
+        <div class="countdown">completed doses</div>
+      </div>
+      
+      <div class="card" style="background: rgba(0, 82, 255, 0.05); border-color: var(--primary);">
+        <div class="stat-label">Alarm Status</div>
+        <div style="margin: var(--space-4) 0;">
+          <button id="enableNotif" class="btn btn-primary">Enable Notifications</button>
+          <button id="testAlarm" class="btn">Test Alarm</button>
+        </div>
+        <div id="alarmState" class="countdown">Off</div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="card">
+      <div class="controls">
+        <button id="showAll" class="btn btn-primary">All Doses</button>
+        <button id="show24" class="btn">Next 24h</button>
+        <button id="showToday" class="btn">Today</button>
+        <button id="hideDone" class="btn">Hide Done: Off</button>
+        <button id="dense" class="btn">Compact: Off</button>
+        <button id="reset" class="btn">Reset Checks</button>
+      </div>
+    </div>
+
+    <!-- Schedule Table -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Done</th>
+            <th>When</th>
+            <th>Medications</th>
+            <th>Notes</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <strong>Regimen:</strong> Methocarbamol q8h (7a/3p/11p) • Gabapentin q12h (11a/11p) • Tylenol q12h (11a/11p) • Meloxicam q24h (9p, daily liquid)
+      <div style="margin-top: var(--space-2);" id="persistInfo"></div>
     </div>
   </div>
-
-  <div class="card" style="margin-top:10px">
-    <div class="row">
-      <button id="showAll" class="btn primary">All</button>
-      <button id="show24" class="btn">Next 24h</button>
-      <button id="showToday" class="btn">Today</button>
-      <button id="hideDone" class="btn">Hide done: Off</button>
-      <button id="dense" class="btn">Dense: Off</button>
-      <button id="reset" class="btn">Reset checks</button>
-    </div>
-  </div>
-
-  <div class="tableWrap" id="tableWrap">
-    <table>
-      <thead><tr><th>Done</th><th>When</th><th>Meds</th><th>Notes</th><th>Status</th></tr></thead>
-      <tbody id="rows"></tbody>
-    </table>
-  </div>
-
-  <div class="card small" style="margin-top:10px;color:var(--muted)">
-    Regimen: Methocarbamol q8h (6a/2p/10p) • Gabapentin q12h (11a/11p) • Tylenol q12h (11a/11p) • Meloxicam q24h (9p, daily liquid)
-    <div id="persistInfo" style="margin-top:6px"></div>
-  </div>
-</div>
 
 <script>
 const KEY='coltrane-med-unified-v3';
@@ -147,16 +399,11 @@ const addEveryHours=(startIso,hours,meds,endIso,notes='')=>{
   while(cur<end){
     add(toLocalIso(cur),meds,notes);
     const next=new Date(cur);
-    next.setHours(next.getHours()+hours); // wall-clock cadence (DST-safe)
+    next.setHours(next.getHours()+hours);
     cur=next;
   }
 };
 
-// Updated per Tara (Mar 4):
-// TZFIX_LOCAL_ANCHOR_V2
-// - Gabapentin + Tylenol q12h at 11:00 / 23:00
-// - Methocarbamol q8h anchored from 06:00
-// - Meloxicam q24h anchored from 21:00
 const horizon='2026-03-18T00:00:00';
 addEveryHours('2026-03-03T21:00:00',24,['Meloxicam'],'2026-03-18T00:00:00','q24h (daily liquid)');
 addEveryHours('2026-03-03T23:00:00',12,['Gabapentin','Tylenol'],'2026-03-18T00:00:00','q12h cadence');
@@ -165,13 +412,13 @@ addEveryHours('2026-03-04T07:00:00',8,['Methocarbamol'],'2026-03-18T00:00:00','q
 const rows=[...events.entries()].sort((a,b)=>new Date(a[0])-new Date(b[0])).map((e)=>({id:`dose:${e[0]}`,iso:e[0],...e[1]}));
 
 if(!state[SEED_KEY]){
-  ['2026-03-03T21:00:00','2026-03-03T23:00:00','2026-03-04T06:00:00','2026-03-04T11:00:00'].forEach(iso=>{ state[`dose:${iso}`]=true; });
+  ['2026-03-03T21:00:00','2026-03-03T23:00:00','2026-03-04T07:00:00','2026-03-04T11:00:00'].forEach(iso=>{ state[`dose:${iso}`]=true; });
   state[SEED_KEY]=true;
   persistState(state);
 }
 
 const fmt=iso=>new Date(iso).toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
-const medClass=m=>m.startsWith('Meth')?'m-meth':m.startsWith('Gaba')?'m-gaba':m.startsWith('Melo')?'m-melo':'m-tyl';
+const medClass=m=>m.startsWith('Meth')?'badge-meth':m.startsWith('Gaba')?'badge-gaba':m.startsWith('Melo')?'badge-melo':'badge-tyl';
 const isToday=dt=>{const n=new Date();return dt.toDateString()===n.toDateString()};
 
 function filtered(list){
@@ -196,17 +443,14 @@ function render(){
   list.forEach(r=>{
     const tr=document.createElement('tr'); if(state[r.id]) tr.classList.add('done');
     const meds=[...new Set(r.meds)];
-    const status=new Date(r.iso)<new Date()?(state[r.id]?'<span class="ok">done</span>':'<span class="bad">overdue</span>'):'upcoming';
+    const status=new Date(r.iso)<new Date()?(state[r.id]?'<span class="status-ok">✓ done</span>':'<span class="status-bad">⚠ overdue</span>'):'upcoming';
     tr.innerHTML=`<td><input type="checkbox" ${state[r.id]?'checked':''} data-id="${r.id}"></td>
       <td>${fmt(r.iso)}</td>
-      <td><div class="meds">${meds.map(m=>`<span class="chip ${medClass(m)}">${m}</span>`).join('')}</div></td>
-      <td>${[...new Set(r.notes)].join('; ')||'-'}</td>
+      <td><div>${meds.map(m=>`<span class="badge ${medClass(m)}">${m}</span>`).join('')}</div></td>
+      <td style="color: var(--text-secondary)">${[...new Set(r.notes)].join('; ')||'-'}</td>
       <td>${status}</td>`;
     if(nd && nd.id===r.id) tr.classList.add('next');
     body.appendChild(tr);
-  });
-  [...document.querySelectorAll('tbody tr')].forEach(tr=>{
-    [...tr.children].forEach((td,i)=>td.setAttribute('data-label',['Done','When','Meds','Notes','Status'][i]));
   });
 
   const todayRows=rows.filter(r=>isToday(new Date(r.iso))); const done=todayRows.filter(r=>state[r.id]).length;
@@ -215,18 +459,17 @@ function render(){
   const n=nextDue();
   if(!n){document.getElementById('nextWhen').textContent='All done'; document.getElementById('nextMeds').textContent='—'; document.getElementById('countdown').textContent='';}
   else {
-    document.getElementById('nextWhen').textContent=fmt(n.iso);
-    document.getElementById('nextMeds').textContent=[...new Set(n.meds)].join(' + ');
+    document.getElementById('nextWhen').textContent=fmt(n.iso).split(',')[1].trim();
+    document.getElementById('nextMeds').innerHTML=[...new Set(n.meds)].map(m=>`<span class="badge ${medClass(m)}">${m}</span>`).join('');
     const ms=new Date(n.iso)-new Date();
     const abs=Math.abs(ms); const h=Math.floor(abs/3600000), m=Math.floor((abs%3600000)/60000);
     document.getElementById('countdown').textContent= ms>=0 ? `in ${h}h ${m}m` : `${h}h ${m}m overdue`;
   }
 
-  const tw=document.getElementById('tableWrap'); tw.classList.toggle('dense',dense);
-  document.getElementById('hideDone').textContent=`Hide done: ${hideDone?'On':'Off'}`;
-  document.getElementById('dense').textContent=`Dense: ${dense?'On':'Off'}`;
+  document.getElementById('hideDone').textContent=`Hide Done: ${hideDone?'On':'Off'}`;
+  document.getElementById('dense').textContent=`Compact: ${dense?'On':'Off'}`;
   const host=location.hostname;
-  document.getElementById('persistInfo').textContent=`Saved locally on this domain (${host}). If you switch domains (e.g., vercel.app vs mybotpetunia.com), checkmarks won't sync.`;
+  document.getElementById('persistInfo').textContent=`✓ Data saved locally on ${host}`;
 }
 
 document.addEventListener('change',e=>{ if(e.target.matches('input[type=checkbox][data-id]')){ state[e.target.dataset.id]=e.target.checked; persistState(state); render(); }});
@@ -237,17 +480,18 @@ document.getElementById('showToday').onclick=()=>{mode='today';render()};
 document.getElementById('hideDone').onclick=()=>{hideDone=!hideDone;render()};
 document.getElementById('dense').onclick=()=>{dense=!dense;render()};
 document.getElementById('reset').onclick=()=>{
-  try{ localStorage.removeItem(KEY); }catch(e){}
-  setCookie(COOKIE_KEY,'{}',-1);
-  location.reload();
+  if(confirm('Reset all checkmarks?')) {
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    setCookie(COOKIE_KEY,'{}',-1);
+    location.reload();
+  }
 };
 
-// Alarm feature (best effort; requires page open)
 let alarmFiredFor='';
 async function enableNotif(){
-  if(!('Notification' in window)){document.getElementById('alarmState').textContent='Notifications not supported on this browser';return;}
+  if(!('Notification' in window)){document.getElementById('alarmState').textContent='Notifications not supported';return;}
   const p=await Notification.requestPermission();
-  document.getElementById('alarmState').textContent=`Notification permission: ${p}`;
+  document.getElementById('alarmState').textContent=`Permission: ${p}`;
 }
 document.getElementById('enableNotif').onclick=enableNotif;
 document.getElementById('testAlarm').onclick=()=>fireAlarm('Test alarm','Coltrane med reminder test');
