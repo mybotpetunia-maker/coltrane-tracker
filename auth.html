@@ -3,80 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign In</title>
+  <title>Sign In — Petunia</title>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzIgMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImlyaXMiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNUVDREQ4Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjQ0JFRkYyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjRThGNEZGIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iNzAlIiBzdG9wLWNvbG9yPSIjQ0RCRUYwIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0E5OTFFMiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaXJpczIiIHgxPSIxMDAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjQTk5MUUyIiBzdG9wLW9wYWNpdHk9IjAuOCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI0NCRUZGMiIgc3RvcC1vcGFjaXR5PSIwLjYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNUVDREQ4IiBzdG9wLW9wYWNpdHk9IjAuOCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzA4MEMxMCIvPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE2LDE2KSI+CiAgICA8ZWxsaXBzZSBjeD0iMCIgY3k9Ii02IiByeD0iMy4yIiByeT0iNiIgZmlsbD0idXJsKCNpcmlzKSIgb3BhY2l0eT0iMC44NSIgdHJhbnNmb3JtPSJyb3RhdGUoMCkiLz4KICAgIDxlbGxpcHNlIGN4PSIwIiBjeT0iLTYiIHJ4PSIzLjIiIHJ5PSI2IiBmaWxsPSJ1cmwoI2lyaXMpIiBvcGFjaXR5PSIwLjc1IiB0cmFuc2Zvcm09InJvdGF0ZSg3MikiLz4KICAgIDxlbGxpcHNlIGN4PSIwIiBjeT0iLTYiIHJ4PSIzLjIiIHJ5PSI2IiBmaWxsPSJ1cmwoI2lyaXMyKSIgb3BhY2l0eT0iMC43IiB0cmFuc2Zvcm09InJvdGF0ZSgxNDQpIi8+CiAgICA8ZWxsaXBzZSBjeD0iMCIgY3k9Ii02IiByeD0iMy4yIiByeT0iNiIgZmlsbD0idXJsKCNpcmlzMikiIG9wYWNpdHk9IjAuNzUiIHRyYW5zZm9ybT0icm90YXRlKDIxNikiLz4KICAgIDxlbGxpcHNlIGN4PSIwIiBjeT0iLTYiIHJ4PSIzLjIiIHJ5PSI2IiBmaWxsPSJ1cmwoI2lyaXMpIiBvcGFjaXR5PSIwLjgiIHRyYW5zZm9ybT0icm90YXRlKDI4OCkiLz4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjUiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiLz4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIxLjUiIGZpbGw9IiNDQkVGRjIiIG9wYWNpdHk9IjAuNyIvPgogIDwvZz4KPC9zdmc+Cg==">
+  <meta name="theme-color" content="#04080D">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400;1,6..96,700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
   <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+    :root {
+      --bg:     #04080D;
+      --surf:   #0C1219;
+      --raised: #121B24;
+      --b1:     rgba(140,175,200,0.07);
+      --b2:     rgba(140,175,200,0.13);
+      --teal:   #5ECDD8;
+      --violet: #A991E2;
+      --t1:     #E0EAF2;
+      --t2:     #A8BDC9;
+      --t3:     #6A8FA8;
+      --t4:     #3A5568;
+      --mono:   'IBM Plex Mono', monospace;
+      --sans:   'IBM Plex Sans', system-ui, sans-serif;
+      --disp:   'Bodoni Moda', Georgia, serif;
+    }
+
     body {
-      margin: 0;
+      background: var(--bg);
+      color: var(--t2);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      background: #0b1020;
-      color: #eef3ff;
-      font-family: system-ui, -apple-system, sans-serif;
+      overflow: hidden;
     }
-    .card {
-      background: #141b34;
-      border: 1px solid #2a335f;
-      border-radius: 12px;
-      padding: 32px;
-      max-width: 400px;
-      width: 100%;
+
+    /* Subtle background glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 50%; left: 50%;
+      width: 600px; height: 600px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(94,205,216,0.04) 0%, rgba(169,145,226,0.02) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .gate {
+      position: relative;
+      z-index: 1;
+      background: var(--surf);
+      border: 1px solid var(--b2);
+      border-radius: 16px;
+      padding: 48px 40px 40px;
+      max-width: 420px;
+      width: 90%;
       text-align: center;
     }
+
+    .gate::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--teal), var(--violet), transparent);
+    }
+
+    .logo {
+      width: 48px; height: 48px;
+      margin: 0 auto 24px;
+    }
+
     h1 {
-      margin: 0 0 8px;
-      font-size: 24px;
+      font-family: var(--disp);
+      font-weight: 400;
+      font-size: 28px;
+      color: var(--t1);
+      letter-spacing: 0.01em;
+      margin-bottom: 8px;
     }
-    .muted {
-      color: #9fb0d0;
-      margin-bottom: 24px;
+
+    .subtitle {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--t3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
     }
+
+    .divider {
+      height: 1px;
+      background: var(--b2);
+      margin: 0 -40px 32px;
+    }
+
     .error {
+      background: rgba(251,113,133,0.08);
+      border: 1px solid rgba(251,113,133,0.2);
+      border-radius: 8px;
       color: #fb7185;
-      margin: 16px 0;
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 12px 16px;
+      margin-bottom: 24px;
       display: none;
     }
+
     #buttonDiv {
       display: flex;
       justify-content: center;
-      margin-top: 24px;
+      margin-bottom: 32px;
+      min-height: 44px;
+    }
+
+    .footer-note {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--t4);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-note a {
+      color: var(--t3);
+      text-decoration: none;
+      border-bottom: 1px solid var(--b2);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .footer-note a:hover {
+      color: var(--teal);
+      border-color: var(--teal);
     }
   </style>
 </head>
 <body>
-  <div class="card">
+  <div class="gate">
+    <svg class="logo" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="iris" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#5ECDD8"/>
+          <stop offset="30%" stop-color="#CBEFF2"/>
+          <stop offset="50%" stop-color="#E8F4FF"/>
+          <stop offset="70%" stop-color="#CDBEF0"/>
+          <stop offset="100%" stop-color="#A991E2"/>
+        </linearGradient>
+        <linearGradient id="iris2" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#A991E2" stop-opacity="0.8"/>
+          <stop offset="50%" stop-color="#CBEFF2" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#5ECDD8" stop-opacity="0.8"/>
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="6" fill="#080C10"/>
+      <g transform="translate(16,16)">
+        <ellipse cx="0" cy="-6" rx="3.2" ry="6" fill="url(#iris)" opacity="0.85" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-6" rx="3.2" ry="6" fill="url(#iris)" opacity="0.75" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="3.2" ry="6" fill="url(#iris2)" opacity="0.7" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="3.2" ry="6" fill="url(#iris2)" opacity="0.75" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="3.2" ry="6" fill="url(#iris)" opacity="0.8" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="2.5" fill="white" opacity="0.9"/>
+        <circle cx="0" cy="0" r="1.5" fill="#CBEFF2" opacity="0.7"/>
+      </g>
+    </svg>
     <h1>Sign In</h1>
-    <div class="muted">This subdomain requires authentication</div>
+    <div class="subtitle">Authorized access only</div>
+    <div class="divider"></div>
     <div class="error" id="error"></div>
     <div id="buttonDiv"></div>
+    <div class="footer-note">
+      <a href="https://mybotpetunia.com">mybotpetunia.com</a>
+    </div>
   </div>
+
   <script>
     const ALLOWED_EMAILS = ['mybotpetunia@gmail.com', 'tara.c.fung@gmail.com', 'jonnyfungmusic@gmail.com'];
-    const CLIENT_ID = '325914100680-1h8tbiklv5u92tjefet2p4ku0kkbj8vk.apps.googleusercontent.com';
-    
+    const CLIENT_ID = '1000108327474-bh8lab49l5dqrqf1ukvomrhk0e5cp041.apps.googleusercontent.com';
+
     function handleCredentialResponse(response) {
-      // Decode JWT to get email
       const payload = JSON.parse(atob(response.credential.split('.')[1]));
       const email = payload.email;
-      
-      // Check allowlist
       if (!ALLOWED_EMAILS.includes(email)) {
-        document.getElementById('error').textContent = 'Access denied. Email not authorized.';
+        document.getElementById('error').textContent = 'Access denied — email not authorized.';
         document.getElementById('error').style.display = 'block';
         return;
       }
-      
-      // Set session cookie with email
       document.cookie = `auth-session=${email}; path=/; max-age=86400; SameSite=Lax`;
-      
-      // Redirect back
       const params = new URLSearchParams(window.location.search);
       const returnUrl = params.get('return') || '/';
       window.location.href = returnUrl;
     }
-    
+
     window.onload = function () {
       google.accounts.id.initialize({
         client_id: CLIENT_ID,
